@@ -1,46 +1,64 @@
-# 🧠 Multi-Metric Similarity API
+<h1 align="center">🧠 Multi-Metric Similarity API</h1>
+<p align="center">A blazing-fast API to calculate multiple similarity & distance metrics from uploaded datasets.</p>
 
-A powerful FastAPI-based microservice to compute multiple similarity and distance metrics on uploaded datasets. Supports numerical, categorical, and textual attributes.
+<p align="center">
+  <img src="https://img.shields.io/badge/FastAPI-🚀-green" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg" alt="Python">
+  <img src="https://img.shields.io/badge/Similarity-Metrics-orange.svg" alt="Similarity Metrics">
+</p>
 
 ---
 
-## 🚀 Features
+ 🚀 Overview
 
-- Upload `.csv`, `.xlsx`, or `.xls` files
-- Select specific columns (attributes) and metrics
-- Computes:
-  - Cosine Similarity (TF-IDF based)
+Multi-Metric Similarity API is a modular FastAPI backend that calculates a variety of distance and similarity measures (numerical, categorical, and textual) from your uploaded CSV or Excel files.
+
+✅ Plug-and-play REST API  
+✅ Ideal for similarity search, recommendation systems, or clustering tasks  
+✅ Supports learned embeddings (SBERT) for rich semantic comparison  
+
+---
+
+ ✨ Key Features
+
+- 📁 Upload `.csv`, `.xlsx`, or `.xls` files
+- 📊 Select specific attributes/columns to compare
+- 🧮 Supports multiple metrics:
+  - Cosine Similarity (TF-IDF)
   - Jaccard Similarity
-  - Euclidean Distance
-  - Manhattan Distance
+  - Euclidean & Manhattan Distances
   - Mahalanobis Distance
   - Hamming Distance
   - Pearson Correlation
   - Levenshtein Distance
   - Dot Product Similarity
-  - SBERT-based Learned Embedding Similarity
+  - SBERT (Learned Embedding Similarity)
 
 ---
 
-## 🧰 Tech Stack
+ ⚙️ Tech Stack
 
-- **FastAPI** for backend API
-- **scikit-learn**, **scipy**, **numpy**, **pandas** for computation
-- **sentence-transformers** for SBERT embeddings
-- **Levenshtein** for edit distance
-- **CORS** enabled for frontend access
+| Tool                     | Purpose                        |
+|--------------------------|--------------------------------|
+| 🐍 Python                | Core language                  |
+| ⚡ FastAPI               | Web framework                  |
+| 🧪 Scikit-learn, Scipy   | Core similarity computations   |
+| 📊 Pandas, Numpy        | Data manipulation              |
+| 🧠 Sentence-Transformers | Embedding generation           |
+| ✂️ Levenshtein          | Edit distance calculation      |
+| 🌐 CORS                 | Frontend compatibility         |
 
 ---
 
-## 📦 Installation
+ 🔧 Installation
 
 ```bash
-git clone https://github.com/your-username/multi-metric-similarity-api.git
+git clone https://github.com/HarshShahAI/multi-metric-similarity-api.git
 cd multi-metric-similarity-api
 pip install -r requirements.txt
 ```
 
-If you're using `uvicorn`:
+Run the API locally:
 
 ```bash
 uvicorn main:app --reload
@@ -48,39 +66,29 @@ uvicorn main:app --reload
 
 ---
 
-## 📥 API Usage
+ 📬 API Usage
 
-### Endpoint
-```
-POST /compute_similarity/
-```
+ 🔗 POST /compute_similarity/
 
-### Parameters (Form Data + File Upload)
+ 🔢 Parameters
 
-- `file`: CSV or Excel file containing your data
-- `selected_attributes`: comma-separated list of columns (e.g., `name,description,price`)
-- `selected_metrics`: comma-separated list of metrics to compute
+| Name                 | Type  | Description                                         |
+|----------------------|-------|-----------------------------------------------------|
+| file                 | File  | CSV/Excel file to upload                            |
+| selected_attributes  | Text  | Comma-separated column names (e.g., name,desc)      |
+| selected_metrics     | Text  | Comma-separated list of metrics to compute          |
 
-### Supported Metrics
+ 🧮 Supported Metrics
 
-- `cosine`
-- `jaccard`
-- `euclidean`
-- `manhattan`
-- `mahalanobis`
-- `hamming`
-- `pearson`
-- `levenshtein`
-- `dotproduct`
-- `learnedembedding`
+cosine, jaccard, euclidean, manhattan, mahalanobis, hamming, pearson, levenshtein, dotproduct, learnedembedding
 
-### Sample Request (Python using `requests`)
+ 📦 Example Python Client
 
 ```python
 import requests
 
 url = "http://127.0.0.1:8000/compute_similarity/"
-files = {'file': open('yourfile.csv', 'rb')}
+files = {'file': open('sample_data/products.csv', 'rb')}
 data = {
     'selected_attributes': 'name,description',
     'selected_metrics': 'cosine,jaccard,learnedembedding'
@@ -91,34 +99,39 @@ print(response.json())
 
 ---
 
-## 📝 Example Response
+ 📊 Sample JSON Response
 
 ```json
 {
-  "cosine": [[1.0, 0.81, ...], [0.81, 1.0, ...], ...],
-  "jaccard": [[1.0, 0.5, ...], [0.5, 1.0, ...], ...],
-  "learnedembedding": [[1.0, 0.88, ...], [0.88, 1.0, ...], ...]
+  "cosine": [[1.0, 0.89], [0.89, 1.0]],
+  "jaccard": [[1.0, 0.52], [0.52, 1.0]],
+  "learnedembedding": [[1.0, 0.93], [0.93, 1.0]]
 }
 ```
 
 ---
 
-## ⚠️ Error Handling
+ ⚠️ Error Handling
 
-- Unsupported file formats return `400`
-- Invalid column names return `400`
-- Internal computation issues return `500` with details
+- ❌ Unsupported file formats → 400 Error
+- ❌ Invalid or missing columns → 400 Error
+- 🔥 Unexpected runtime errors → 500 Error
+
+---
+
+ 📁 Folder Structure
 
 ---
 
 ## 📄 License
 
-MIT License © [Your Name]
+MIT License  
+Developed with ❤️ by Harsh Shah
 
 ---
 
-## 🙌 Acknowledgments
+## 🙌 Acknowledgements
 
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [Sentence Transformers](https://www.sbert.net/)
-- [scikit-learn](https://scikit-learn.org/)
+Powered by amazing tools:  
+[FastAPI](https://fastapi.tiangolo.com/) · [scikit-learn](https://scikit-learn.org/) · [Sentence-Transformers](https://www.sbert.net/) · [Levenshtein](https://pypi.org/project/python-Levenshtein/)
+
