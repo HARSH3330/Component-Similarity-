@@ -1,11 +1,8 @@
-<h1 align="center">🧠 Multi-Metric Similarity API</h1>
-<p align="center">A blazing-fast API to calculate multiple similarity & distance metrics from uploaded datasets.</p>
+🧠 Multi-Metric Similarity API
 
-<p align="center">
-  <img src="https://img.shields.io/badge/FastAPI-🚀-green" alt="FastAPI">
-  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg" alt="Python">
-  <img src="https://img.shields.io/badge/Similarity-Metrics-orange.svg" alt="Similarity Metrics">
-</p>
+A powerful FastAPI-based microservice to compute multiple similarity and distance metrics on uploaded datasets. Supports numerical, categorical, and textual attributes.
+
+
 
 ---
 
