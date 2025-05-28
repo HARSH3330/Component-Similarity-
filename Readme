@@ -1,0 +1,124 @@
+# 🧠 Multi-Metric Similarity API
+
+A powerful FastAPI-based microservice to compute multiple similarity and distance metrics on uploaded datasets. Supports numerical, categorical, and textual attributes.
+
+---
+
+## 🚀 Features
+
+- Upload `.csv`, `.xlsx`, or `.xls` files
+- Select specific columns (attributes) and metrics
+- Computes:
+  - Cosine Similarity (TF-IDF based)
+  - Jaccard Similarity
+  - Euclidean Distance
+  - Manhattan Distance
+  - Mahalanobis Distance
+  - Hamming Distance
+  - Pearson Correlation
+  - Levenshtein Distance
+  - Dot Product Similarity
+  - SBERT-based Learned Embedding Similarity
+
+---
+
+## 🧰 Tech Stack
+
+- **FastAPI** for backend API
+- **scikit-learn**, **scipy**, **numpy**, **pandas** for computation
+- **sentence-transformers** for SBERT embeddings
+- **Levenshtein** for edit distance
+- **CORS** enabled for frontend access
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/your-username/multi-metric-similarity-api.git
+cd multi-metric-similarity-api
+pip install -r requirements.txt
+```
+
+If you're using `uvicorn`:
+
+```bash
+uvicorn main:app --reload
+```
+
+---
+
+## 📥 API Usage
+
+### Endpoint
+```
+POST /compute_similarity/
+```
+
+### Parameters (Form Data + File Upload)
+
+- `file`: CSV or Excel file containing your data
+- `selected_attributes`: comma-separated list of columns (e.g., `name,description,price`)
+- `selected_metrics`: comma-separated list of metrics to compute
+
+### Supported Metrics
+
+- `cosine`
+- `jaccard`
+- `euclidean`
+- `manhattan`
+- `mahalanobis`
+- `hamming`
+- `pearson`
+- `levenshtein`
+- `dotproduct`
+- `learnedembedding`
+
+### Sample Request (Python using `requests`)
+
+```python
+import requests
+
+url = "http://127.0.0.1:8000/compute_similarity/"
+files = {'file': open('yourfile.csv', 'rb')}
+data = {
+    'selected_attributes': 'name,description',
+    'selected_metrics': 'cosine,jaccard,learnedembedding'
+}
+response = requests.post(url, files=files, data=data)
+print(response.json())
+```
+
+---
+
+## 📝 Example Response
+
+```json
+{
+  "cosine": [[1.0, 0.81, ...], [0.81, 1.0, ...], ...],
+  "jaccard": [[1.0, 0.5, ...], [0.5, 1.0, ...], ...],
+  "learnedembedding": [[1.0, 0.88, ...], [0.88, 1.0, ...], ...]
+}
+```
+
+---
+
+## ⚠️ Error Handling
+
+- Unsupported file formats return `400`
+- Invalid column names return `400`
+- Internal computation issues return `500` with details
+
+---
+
+## 📄 License
+
+MIT License © [Your Name]
+
+---
+
+## 🙌 Acknowledgments
+
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Sentence Transformers](https://www.sbert.net/)
+- [scikit-learn](https://scikit-learn.org/)
